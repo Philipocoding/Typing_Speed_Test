@@ -3,10 +3,6 @@ import customtkinter
 import keyboard
 from tkinter import BOTH
 
-#----------Methods-------------
-
-def checkEntry():
-    print("hi")
 #----------UI setup------------
 app = customtkinter.CTk()
 app.geometry("1500x700")
@@ -17,6 +13,14 @@ app.config(bg="steel blue")
 
 frame_1 = customtkinter.CTkFrame(app, fg_color="red")
 frame_1.pack(fill = BOTH, expand = True)
+
+frame_2 = customtkinter.CTkFrame(app, fg_color="blue")
+frame_2.pack(fill = BOTH, expand = True)
+frame_2.propagate(0)
+frame_1.propagate(0)
+
+timer = customtkinter.CTkLabel(frame_1, text = "blue")
+timer.pack()
 
 label_A = customtkinter.CTkLabel(frame_1, text = 'A', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 1, padx = 2)
 label_B = customtkinter.CTkLabel(frame_1, text = 'B', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 2, padx = 2)
@@ -45,14 +49,26 @@ label_X = customtkinter.CTkLabel(frame_1, text = 'X', fg_color= "red", font = ("
 label_Y = customtkinter.CTkLabel(frame_1, text = 'Y', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 25, padx = 2)
 label_Z = customtkinter.CTkLabel(frame_1, text = 'Z', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 26, padx = 2)
 
-frame_2 = customtkinter.CTkFrame(app, fg_color="blue")
-frame_2.pack(fill = BOTH, expand = True)
+#----------Methods-------------
+sentence = "The quick brown fox jumps over the lazy dog".replace(" ", "")
+def generateSentence():
+    global sentence
+    pass
+def checkEntry(entry):
+    global sentence
+    if(entry.replace(" ", "") == sentence):
+        print("yes")
+    else:
+        print("No")
 
-entry_Box = customtkinter.CTkEntry(frame_2, width = 300, height=30).pack()
+entry_Box = tkinter.Entry(frame_2, width = 100, )
+entry_Box.pack()
+start_Button = customtkinter.CTkButton(frame_2, command= lambda: checkEntry(entry_Box.get()), width = 70, text = "Start")
+start_Button.pack()
+finish_Button = customtkinter.CTkButton(frame_2,command = lambda: checkEntry(entry_Box.get()), width = 70, text = "Finish")
+finish_Button.pack()
 
-keyboard.read_hotkey('enter', checkEntry())
+
+entry = entry_Box.get()
+checkEntry(entry)
 app.mainloop()
-
-
-#entry_Box.bind("<Key>", checkEntry)
-#label_A.grid(row = 2, column = 0)
