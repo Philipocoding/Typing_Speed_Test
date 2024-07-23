@@ -19,8 +19,6 @@ frame_2.pack(fill = BOTH, expand = True)
 frame_2.propagate(0)
 frame_1.propagate(0)
 
-timer = customtkinter.CTkLabel(frame_1, text = "blue")
-timer.pack()
 
 label_A = customtkinter.CTkLabel(frame_1, text = 'A', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 1, padx = 2)
 label_B = customtkinter.CTkLabel(frame_1, text = 'B', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 2, padx = 2)
@@ -49,26 +47,48 @@ label_X = customtkinter.CTkLabel(frame_1, text = 'X', fg_color= "red", font = ("
 label_Y = customtkinter.CTkLabel(frame_1, text = 'Y', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 25, padx = 2)
 label_Z = customtkinter.CTkLabel(frame_1, text = 'Z', fg_color= "red", font = ("Arial", 25)).grid(row = 2, column = 26, padx = 2)
 
+timer_label = customtkinter.CTkLabel(frame_1, text = "0", font = ("Arial", 25))
+timer_label.pack(pady = 100)
+complete_Label = customtkinter.CTkLabel(frame_1, text = "", font = ("Arial", 25))
+complete_Label.pack()
 #----------Methods-------------
-sentence = "The quick brown fox jumps over the lazy dog".replace(" ", "")
+time = 0
+valid = True
+sentence = "the quick brown fox jumps over the lazy dog".replace(" ", "")
 def generateSentence():
     global sentence
     pass
+
+
 def checkEntry(entry):
     global sentence
+    global valid
     if(entry.replace(" ", "") == sentence):
         print("yes")
+        time = 0
+        valid = False
+        complete_Label.configure(text = "Complete!")
     else:
         print("No")
 
+def Timer():
+    global valid
+    if(valid):
+        global time
+        time = time + 1
+        timer_label.configure(text = str(time))
+        timer_label.after(1000, Timer)
+
+
 entry_Box = tkinter.Entry(frame_2, width = 100, )
 entry_Box.pack()
-start_Button = customtkinter.CTkButton(frame_2, command= lambda: checkEntry(entry_Box.get()), width = 70, text = "Start")
+start_Button = customtkinter.CTkButton(frame_2, command= lambda: Timer(), width = 70, text = "Start")
 start_Button.pack()
-finish_Button = customtkinter.CTkButton(frame_2,command = lambda: checkEntry(entry_Box.get()), width = 70, text = "Finish")
+finish_Button = customtkinter.CTkButton(frame_2, command = lambda: checkEntry(entry_Box.get()), width = 70, text = "Finish")
 finish_Button.pack()
 
 
-entry = entry_Box.get()
-checkEntry(entry)
+
+#entry = entry_Box.get()
+#checkEntry(entry)
 app.mainloop()
