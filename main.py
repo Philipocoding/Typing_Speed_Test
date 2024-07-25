@@ -21,11 +21,13 @@ frame_2.propagate(0)
 frame_1.propagate(0)
 
 
-Into_Label = customtkinter.CTkLabel(frame_1, text = 'Welcome! Press start and see how fast you can type the phrase:', fg_color= "red", font = ("Arial", 25)).pack()
-Into_Label = customtkinter.CTkLabel(frame_1, text = 'The quick brown fox jumps over the lazy dog', fg_color= "red", font = ("Arial", 25)).pack(pady = 50)
+Into_Label = customtkinter.CTkLabel(frame_1, text = 'Welcome! Press start and see how fast you can type the phrase:', fg_color= "red", font = ("Arial", 25))
+Into_Label.pack()
+Into_Label2 = customtkinter.CTkLabel(frame_1, text = 'The quick brown fox jumps over the lazy dog', fg_color= "red", font = ("Arial", 25))
+Into_Label2.pack(pady = 50)
 
 timer_label = customtkinter.CTkLabel(frame_1, text = "0", font = ("Arial", 25))
-timer_label.pack(pady = 100)
+timer_label.pack(pady = 10, padx = 10)
 complete_Label = customtkinter.CTkLabel(frame_1, text = "", font = ("Arial", 25))
 complete_Label.pack()
 
@@ -84,7 +86,4 @@ def Timer():
         timer_label.after(1000, Timer)
 
 StartButton()
-
-#entry = entry_Box.get()
-#checkEntry(entry)
 app.mainloop()
